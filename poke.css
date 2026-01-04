@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('/images/pokedexbody.jpg');
+    background-image: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+}
+
+/* MAIN CONTAINER */
+
+#pokeContainer {
+    width: 80vw;
+    height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    background-image: url('/images/pokedex');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    border: 5px solid rgb(212, 0, 0);
+    box-shadow: 4px 4px 4px rgb(91, 92, 94);
+}
+
+#pokeContainer h3 {
+    color: white;
+    text-shadow: 2px 2px 2px grey;
+
+    transition: color 0.3s ease;
+}
+
+/* SEARCH BAR */
+
+#searchBar {
+    width: 50vw;
+    height: 5vh;
+    outline: none;
+    border: 4px solid red;
+
+    transition: transform 0.3s ease;
+}
+
+
+#searchBar:focus {
+    border-radius: 20px;
+    border: 4px solid greenyellow;
+    transform: scale(1.025);
+}
+
+/* INDIVIDUAL POKEMON */
+
+.pokeBox {
+    width: 5vw;
+    height: 11vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/images/pokedexbg.jpg');
+    object-fit: contain;
+    border-radius: 20px;
+    border: 2px solid black;
+
+    transition: background-image 0.3s ease; 
+}
+.sprites{
+    transition: transform 0.3s ease;
+}
+
+.sprites:hover {
+    cursor: pointer;
+     transform: scale(1.2);
+}
+
+.pokeBox:has(.sprites:hover) {
+    background-image: url('/images/pokebg2.png');
+}
+
