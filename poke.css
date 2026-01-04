@@ -27,6 +27,8 @@ body {
     border-radius: 20px;
     border: 5px solid rgb(212, 0, 0);
     box-shadow: 4px 4px 4px rgb(91, 92, 94);
+
+    transition: 0.3s ease;
 }
 
 #pokeContainer h3 {
@@ -35,6 +37,58 @@ body {
 
     transition: color 0.3s ease;
 }
+
+.popupWindow {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(59, 74, 87);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+}
+
+
+.popupWindow.show {
+    transition: opacity 0.3s ease;
+    opacity: 0.75;
+    visibility: visible;
+}
+.popupWindow img {
+    opacity: 100%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    transform: scale(5);
+    z-index: 0;
+
+    transition: transform 0.3s ease;
+}
+
+.popupWindow img:hover {
+    cursor: pointer;
+    transform: scale(6);
+}
+
+
+.popupWindow h1 {
+    opacity: 100%;
+    margin-top: 10%;
+    margin-bottom: 2%;
+    z-index: 1;
+}
+
+.popupWindow button {
+    opacity: 100%;
+    z-index: 1;
+}
+
 
 /* SEARCH BAR */
 
