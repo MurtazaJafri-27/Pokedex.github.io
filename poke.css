@@ -39,56 +39,78 @@ body {
 }
 
 .popupWindow {
-    height: 80vh;
+   height: 80vh;
     width: 100vw;
     display: flex;
-
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    background-color: rgb(59, 74, 87);
+    align-items: flex-start;      /* 👈 center horizontally */  /* 👈 center vertically */
+    gap: 2rem;                /* 👈 spacing between image & heading */
+    background-color: rgba(59, 74, 87, 0.75);
 
     opacity: 0;
     visibility: hidden;
-
-    transition: 0.3s ease;
+    transform: scale(0);
+    transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
 
 .popupWindow.show {
     transition: opacity 0.3s ease;
-    opacity: 0.75;
+    transition: transform 0.5s ease;
+    opacity: 1;
     visibility: visible;
+    transform: scale(1);
 }
 .popupWindow img {
-    opacity: 100%;
-    margin-top: 5%;
-    margin-bottom: 2%;
-    transform: scale(5);
+    opacity: 1;
+    margin-top: 12%;
+    margin-left: 13%;
+    transform: scale(4);
     z-index: 0;
 
     transition: transform 0.3s ease;
 }
 
 .popupWindow img:hover {
-    cursor: pointer;
-    transform: scale(6);
+    transform: scale(4.2);
 }
 
 
 .popupWindow h1 {
-    opacity: 100%;
-    margin-top: 10%;
-    margin-bottom: 2%;
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    position: fixed;
+    top: 8%;
+    left: 47%;
+    opacity: 1;
     z-index: 1;
 }
 
 .popupWindow button {
-    opacity: 100%;
+    display: flex;
+    width: 10vw;
+    height: 7vh;
+
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 20px;
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    opacity: 1;
     z-index: 1;
+
+    transition: background-color 0.3s ease;
 }
 
+.popupWindow button:hover {
+    cursor: pointer;
+    text-shadow: 3px 3px 3px grey;
+    transform: scale(1.025);
+    background-color: greenyellow;
+}
 
 /* SEARCH BAR */
 
@@ -114,7 +136,7 @@ body {
     width: 6vw;
     height: 13vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: url('images/pokedexbg.jpg');
@@ -125,9 +147,10 @@ body {
     transition: background-image 0.3s ease; 
 }
 
-.pokeBox h3 {
-    margin-top: 30%;
+.pokeBox img {
+   margin-top: 45%;
 }
+
 .sprites{
     transition: transform 0.3s ease;
 }
