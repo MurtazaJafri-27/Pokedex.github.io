@@ -2,27 +2,46 @@ let pokeArray = [];
 const pokeContainer = document.getElementById('pokeContainer');
 const searchBar = document.getElementById('searchBar');
 
+const fetchPromises = [];  // Fixed: = [] instead of []
+
 for(let id = 1; id <= 700; id++){
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+  const promise = fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
     .then(response => response.json())
     .then(data => {
-      let pokemon = {
+      return {  // Return the pokemon object
+        id: id,  // Add id for sorting
         name: data.name,
         sprite: data.sprites.front_default
       };
-      pokeArray.push(pokemon);
-      
-      displayPokemon(pokemon); // Call the function!
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+      console.error('Error:', error);
+      return null;  // Return null on error
+    });
+  
+  fetchPromises.push(promise);  // Push the promise, not the pokemon
 }
+
+Promise.all(fetchPromises).then(allPokemon => {
+  // Filter out any null results from errors
+  allPokemon = allPokemon.filter(p => p !== null);
+  
+  // Sort by ID
+  allPokemon.sort((a, b) => a.id - b.id);
+
+  pokeArray = allPokemon;
+
+  pokeArray.forEach(pokemon => {
+    displayPokemon(pokemon);
+  });
+});
 
 // Define function OUTSIDE the fetch loop
 function displayPokemon(pokemon){
   const pokeBox = document.createElement('div');
   pokeBox.className = 'pokeBox';
   pokeBox.style.margin = '3%';
-  pokeBox.dataset.name = pokemon.name; // Add this - it was missing!
+  pokeBox.dataset.name = pokemon.name;
 
   // CAPITALIZING NAME
   const capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
