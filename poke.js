@@ -1,3 +1,4 @@
+
 let pokeArray = [];
 const pokeContainer = document.getElementById('pokeContainer');
 const searchBar = document.getElementById('searchBar');
@@ -11,7 +12,9 @@ for(let id = 1; id <= 700; id++){
       return {
         id: id,
         name: data.name,
-        sprite: data.sprites.front_default
+        artwork: data.sprites.other['official-artwork'].front_default,
+        sprite: data.sprites.front_default,
+        stats: data.stats
       };
     })
     .catch(error => {
@@ -64,11 +67,23 @@ function displayPokemon(pokemon){
       // Create popup window
       const popupWindow = document.createElement('div');
       popupWindow.className = 'popupWindow';
-      
+      let statsHTML = '<div class="stats">';
+pokemon.stats.forEach(stat => {
+  const statName = stat.stat.name.replace('-', ' ').toUpperCase();
+  statsHTML += `
+    <div class="stat-item">
+      <span class="stat-name">${statName}:</span>
+      <span class="stat-value">${stat.base_stat}</span>
+    </div>
+  `;
+});
+
+statsHTML += '</div>';
       // Add Pokemon info to popup
       popupWindow.innerHTML = `
-        <img src="${pokemon.sprite}" alt="${pokemon.name}">
         <h1>${capitalizedName}</h1>
+        ${statsHTML}
+        <img class="pokeArt" src="${pokemon.artwork}" alt="${pokemon.name}">
         <button id="closePopup">Close</button>
       `;
       
